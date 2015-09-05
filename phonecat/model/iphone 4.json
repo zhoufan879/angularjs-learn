@@ -1,0 +1,11 @@
+{
+	"id" : 1001,
+	"name" : "iphone 4",
+	"imgs" : [
+		{ "img":"http://img02.sogoucdn.com/app/a/100520093/244c86b44446d453-b4b9a46aaf4ad161-2db33425b64c3537aa98aaf7fdb7aee1.jpg"},
+		{ "img":"http://img03.sogoucdn.com/app/a/100520093/df147ac0b3a52d9a-1f77669ae5a43b1a-6b0748d1b30ff71a19674ccf5cc45c62.jpg"},
+		{ "img":"http://img04.sogoucdn.com/app/a/100520093/84bbacd9cddc14de-d4261205d951e581-f4f0820049b279e3fe49f87c3c6e8fed.jpg"}
+	],
+	"desc" : "iPhone 4是结合照相手机、个人数码助理、媒体播放器以及无线通信设备的掌上设备，iPhone4没有键盘，而是创新地引入了多点触摸（Multi-touch）触摸屏界面。",
+	"publish" : "2010-6-8"
+}

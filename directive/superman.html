@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="superman">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<script type="text/javascript" src="../js/angular.1.4.3.js" ></script>
+		
+		<script type="text/javascript">
+			
+			var superman = angular.module("superman", []);
+			
+			superman.directive("superman", function(){
+				return {
+					restrict: "AE",
+				}
+			});
+			
+		</script>
+		
+	</head>
+	<body>
+		
+		<ul>
+			<li>
+				<!-- 雷神 -->
+				<superman thor></superman>
+			</li>
+			<li>
+				<!-- 美国队长 -->
+				<superman captainAmerica></superman>
+			</li>
+			<li>
+				<!-- 钢铁侠 -->
+				<superman ironman></superman>
+			</li>
+			<li>
+				<!-- 绿巨人 -->
+				<superman hulk></superman>
+			</li>
+		</ul>
+		
+	</body>
+</html>
+

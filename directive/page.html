@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+		<style type="text/css">
+			.navbar,footer {
+				height: 33px;
+				width: 100%;
+				color: #fff;
+				background: #000;
+			}
+			
+			.navbar ul, footer ul {
+				list-style: none;
+			}
+			
+			.navbar ul li, footer ul li {
+				float: left;
+				width: 100px;
+				height: 22px;
+				line-height: 22px;
+			}
+			
+			.content {
+				margin: 20px;
+			}
+			
+		</style>
+
+		<script type="text/javascript" src="../js/angular.1.4.3.js" ></script>
+		
+		<script type="text/javascript">
+			
+			var myModule = angular.module("myapp", []);
+			
+			myModule.directive("navbar", function() {
+				return {
+					restrict: "E",
+					template: "<div class='navbar'><ul><li>Home</li><li>About</li></ul></div>",
+					replace: true
+				}
+			}).directive("content", function() {
+				return {
+					restrict: "E",
+					template: "<div class='content'>123456</div>",
+					replace: true
+				}
+			}).directive("foot", function() {
+				return {
+					restrict: "E",
+					template: "<footer><ul><li>@copyright</li></ul></footer>",
+					replace: true
+				}
+			});
+			
+		</script>
+		
+	</head>
+	<body>
+		
+		<navbar></navbar>
+		<content></content>
+		<foot></foot>
+		
+	</body>
+</html>

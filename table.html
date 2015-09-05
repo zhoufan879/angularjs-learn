@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Hello,angularjs.</title>
+		
+		<script type="text/javascript" src="js/angular.1.4.3.js" ></script>
+	</head>
+	<body>
+		
+		<div ng-app="myApp" ng-controller="tableController" >
+			<table border=1>
+				<tr ng-repeat="x in persons">
+					<td>{{ $index + 1 }}</td>
+					<td>{{ x.name }}</td>
+					<td>{{ x.city }}</td>
+					<td>{{ $odd + ' - ' + $even }}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<script type="text/javascript">
+			angular.module("myApp", []).controller("tableController", function($scope, $http){
+				$scope.persons = [
+					{name:'zhoufan', city:'China SZ'},
+					{name:'annie', city:'USA NY'},
+					{name:'cici', city:'Canada'},
+					{name:'nono', city:'China TW'},
+				];
+			});
+		</script>
+		
+	</body>
+</html>

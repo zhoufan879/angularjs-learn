@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<title>尝试ngResource RESTFUL 构建http协议</title>
+		
+	
+		<style type="text/css">
+			a {
+				padding: 10px;
+				font-weight: 700;
+			}
+			.main {
+				text-align: center;
+			}
+			.main label {
+				display: inline-block;
+				margin-left: 10px;
+				width: 20%;
+			}
+			.main input {
+				width: 60%;
+				line-height: 30px;
+				margin: 5px;
+			}
+			.main button {
+				width: 95%;	
+				line-height: 30px;
+			}
+		</style>
+		
+		<script type="text/javascript" src="../js/angular.1.4.3.js" ></script>
+		<script type="text/javascript" src="../js/angular-route.js" ></script>
+		<script type="text/javascript" src="../js/angular-resource.js" ></script>
+		
+		<script type="text/javascript">
+			var app = angular.module("httpApp", ["ngRoute", "ngResource"]);
+			
+			app.config(["$routeProvider", function($routeProvider){
+				$routeProvider
+				.when("/add", {
+					templateUrl: "add.html",
+					controller : ["$scope", function($scope){
+						$scope.addUser = function(){
+							console.log($scope.user);
+							
+							var userService = $resource("http://127.0.0.1:8080/mobile-biz/test/users/:id", { id : "@id" });
+							var user = userService.get({ id : $scope.user.id}, function(user){
+								console.log("res:" + user);
+							});
+						}
+					}]
+				}).when("/del", {
+					templateUrl: "delete.html",
+					controller : ["$scope", function($scope){
+						$scope.delUser = function(){
+							console.log($scope.user);
+						}
+					}]
+				}).when("/update", {
+					templateUrl: "update.html",
+					controller : ["$scope", function($scope){
+						$scope.updateUser = function(){
+							console.log($scope.user);
+						}
+					}]
+				}).when("/q", {
+					templateUrl: "query.html",
+					controller : ["$scope", "$resource", function($scope, $resource){
+						$scope.query = function(){
+							console.log($scope.user);
+							var userService = $resource("http://127.0.0.1:8080/mobile-biz/test/users/:id", { id : "@id" });
+							var user = userService.get({ id : $scope.user.id}, function(user){
+								console.log("res:" + user);
+							});
+							console.log(user);
+						}
+					}]
+				}).otherwise({
+					redirectTo: "/add"
+				});
+			}]);
+		</script>
+	</head>
+	<body ng-app="httpApp">
+		<a href="#add">Add</a> |
+		<a href="#del">Delete</a> | 
+		<a href="#update">Update</a> | 
+		<a href="#q">Query</a>
+		<hr>
+		<ng-view></ng-view>
+		
+	</body>
+</html>

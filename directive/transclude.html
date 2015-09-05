@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<script type="text/javascript" src="../js/angular.1.4.3.js" ></script>
+		
+		<script type="text/javascript">
+			
+			var myModule = angular.module("myapp", []);
+			
+			myModule.directive("hello", function() {
+				return {
+					// A - Attr
+					// E - Element
+					// M - coMment
+					// C - Class
+					restrict: "AEMC",
+					template: "<h1>hello,<span ng-transclude></span>angularjs!</h1>",
+					transclude: true,
+					replace: true
+				}
+			});
+			
+		</script>
+		
+	</head>
+	<body>
+		
+		1.<hello>my </hello>
+		2.<div hello>my </div>
+		3.<div class="hello">my </div>
+		4.<!-- directive:hello -->
+		
+	</body>
+</html>
+

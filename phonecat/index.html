@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Home</title>
+
+		<link rel="stylesheet" href="phonecat/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="phonecat/css/phone.css" />
+
+		<script type="text/javascript" src="phonecat/js/angular.js"></script>
+		<script type="text/javascript" src="phonecat/js/angular-route.js"></script>
+		<script type="text/javascript" src="phonecat/js/angular-resource.js"></script>
+		
+		<script type="text/javascript" src="phonecat/js/app.js" ></script>
+		
+		<script type="text/javascript" src="phonecat/js/jquery.min.js"></script>
+	    <script type="text/javascript" src="phonecat/js/bootstrap.min.js" ></script>
+		
+	</head>
+
+	<body>
+		<nav class="navbar navbar-dark navbar-fixed-top bg-inverse">
+			<button type="button" class="navbar-toggler visible-xs" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">My Phone Cat ( clone from angular's)</a>
+			<nav class="nav navbar-nav pull-left">
+				<a class="nav-item nav-link" href="#">Dashboard</a>
+				<a class="nav-item nav-link" href="#">Settings</a>
+				<a class="nav-item nav-link" href="#">Profile</a>
+				<a class="nav-item nav-link" href="#">Help</a>
+			</nav>
+			<form class="navbar-form pull-right">
+				<input type="text" class="form-control" placeholder="Search...">
+			</form>
+		</nav>
+		<div class="container-fluid" >
+			<div class="row" ng-app="phoneApp">
+				<ng-view></ng-view>
+			</div>
+		</div>
+	</body>
+
+</html>

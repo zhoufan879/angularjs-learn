@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<script type="text/javascript" src="../js/angular.1.4.3.js" ></script>
+		
+		<script type="text/javascript">
+			
+			var myModule = angular.module("myapp", []);
+			
+			myModule.directive("hello", function() {
+				return {
+					// A - Attr
+					// E - Element
+					// M - coMment
+					// C - Class
+					restrict: "AEMC",
+					template: "<h1>hello,angularjs!</h1>",
+					replace: true
+				}
+			});
+			
+		</script>
+		
+	</head>
+	<body>
+		
+		1.<hello>123</hello>
+		2.<div hello>123</div>
+		3.<div class="hello">123</div>
+		4.<!-- directive:hello -->
+		
+	</body>
+</html>
+

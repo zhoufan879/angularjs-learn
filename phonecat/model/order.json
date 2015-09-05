@@ -1,0 +1,14 @@
+[
+{
+	"code" : "publish",
+	"value" : "发布日期"
+},
+{
+	"code" : "name",
+	"value" : "名称"
+},
+{
+	"code" : "id",
+	"value" : "编号"
+}
+]

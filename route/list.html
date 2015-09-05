@@ -1,0 +1,9 @@
+<div>
+	<ul>
+		<li ng-repeat="book in books">
+			<a href="#/book/{{book.id}}">
+				{{ book.name + ' - ' + book.author }}
+			</a>
+		</li>
+	</ul>
+</div>

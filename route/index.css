@@ -1,0 +1,41 @@
+html,body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+ul,h1,p {
+	margin:0;
+}
+
+.main {
+	height: 100%;
+	width: 100%;
+}
+
+.books {
+	background: #E59400;
+	color: #fff;
+}
+
+.book {
+	background: #00D0BC;
+	color: #fff;
+}
+
+.ng-enter {
+	z-index: 8888;
+}
+.ng-leave {
+	z-index: 9999;
+}
+.books.ng-enter {
+	animation: scaleUp 0.5s both ease-in;
+}
+
+@-webkit-keyframes scaleUp {
+	from{
+		opacity: 0.3;
+		transform: scale(0.9);
+	}
+}

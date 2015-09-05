@@ -1,0 +1,11 @@
+.row {
+	margin: 0 0.001rem;
+    padding-top: 50px;
+}
+.l-left {
+	position: fixed;
+}
+.l-list img {
+	width: 100px;
+	height: 80px;
+}
