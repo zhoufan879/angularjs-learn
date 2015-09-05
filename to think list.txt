@@ -1,0 +1,19 @@
+前端学习：
+1. sublime
+2. grunt-beginner
+3. jade
+4. FIS
+5. reactjs
+6. nodejs
+7. Express
+8. Bower
+9. http-server
+10. karma + jasmine
+11. Protractor(angularjs)
+
+
+后端：
+1. docker
+2. ActiveMQ
+3. Dubbo(taobao)
+4. 分布式架构
