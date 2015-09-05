@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			/*
+			 * 知识点
+			 * 
+			 * 工具方法：
+			 * angular.bind
+			 * angular.copy
+			 * angular.extend
+			 * angular.isArray/isDate/isDefined/isUndefined/isFunction/isObject/isNumber/isString/isElement
+			 * angular.equals
+			 * angular.forEach
+			 * angular.fromJson / toJson
+			 * angular.identity / noop
+			 * angular.lowercase / uppercase
+			 * angular.element
+			 * angular.bootstrap
+			 * angular.injector 内部注册器
+			 * 
+			 * see 8
+			 * */
+		
+			angular.module("myapp", []).controller("abc", ["$scope", "$rootScope", function($scope, $rootScope){
+				var a = [];
+				console.log( angular.isArray( a ) );	// Array.isArray();
+				
+				console.log( angular.isDate( new Date() ) );	// [object Date]
+				
+				console.log( angular.isDefined( undefined ) );	// typeof
+				
+				console.log( angular.isUndefined( undefined ) );// typeof
+				
+				console.log( angular.isFunction( function(){} ) );	// typeof
+			
+				console.log( angular.isObject( [] ) );			// typeof
+				
+				console.log( angular.isNumber( 1 ) );			// typeof
+				
+				console.log( angular.isString( "" ) );			// typeof
+				
+				console.log( angular.isElement( document ) );	// node.nodeName || (node.prop && node.attr && node.find )
+
+				// equals foreach json
+				console.log( angular.equals({}, []) );
+				
+				var arrays = [1,2,3,4,5];
+				angular.forEach(arrays, function( val, index ){		// for ... call
+					console.log( index + " - " + val );
+				});
+				
+				var obj = {
+					name : 'zhoufan',
+					rich : true,
+					tall : true,
+					handsome : true
+				};
+				console.log(angular.toJson(obj));			// JSON.stringify
+				console.log(angular.fromJson(obj));			// JSON.parse
+
+				console.log( angular.identity('123') );		// return this;
+				console.log( angular.noop() );				// undefined
+				
+				console.log( angular.element(document) );	// JQLite: imitate the jquery 
+			}]);
+			
+			document.onclick = function(){
+				angular.bootstrap(document, ["myapp"]);
+			}
+			
+		</script>
+	</head>
+	<body>
+		
+		<div ng-controller="abc">
+			<input type="text" ng-model="name" />
+			<p>{{ name }}</p>
+		</div>
+		<p>{{ name }}</p>
+		
+		<div id="www"></div>
+	</body>
+</html>

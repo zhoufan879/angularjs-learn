@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style type="text/css">
+			.bigone {
+				font-size: 50px;
+				font-weight: 800;
+			}
+		</style>
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			/**
+			 * 知识点：
+			 *
+			 * $location
+			 * 	- absUrl()
+			 *  - path()
+			 *  - replace()
+			 *  - hash()
+			 *  - search()
+			 *  - url()
+			 *  - host()
+			 *  - port()
+			 *  - protocol()
+			 */
+			
+			/*
+			 * $anchorScroll
+			 * $cacheFactory
+			 * 	- info()
+			 *  - put()
+			 *  - get()
+			 *  - remove()
+			 *  - config size:capacity
+			 * $interpolate 
+			 * 
+			 */
+		
+			angular.module("myapp", [])
+			.controller("location", ["$scope", "$location", function($scope, $location){
+				// $location.replace();		// no history
+				$location.hash("$user");
+				$location.search("name", "zhoufan879")
+				console.log($location);
+				console.log($location.absUrl());
+				console.log($location.path());			// get #param#
+				console.log($location.hash());
+				console.log($location.search());
+				console.log($location.url());			// get all param ?
+			}])
+			.controller("other", ["$scope", "$location", "$anchorScroll", function($scope, $location, $anchorScroll){
+				$scope.list = [
+					{
+						name: "肉色",
+						url: "http://img03.sogoucdn.com/app/a/100520024/5c594a5627b5cc65cda8f77861335753"
+					},
+					{
+						name: "小清新",
+						url: "http://img03.sogoucdn.com/app/a/100520024/1d16e09e34a478ac2ac4d621b6d0e412"
+					},
+					{
+						name: "性感",
+						url: "http://img04.sogoucdn.com/app/a/100520024/a805bbd96616cfc20c2740d4e459cb97"
+					},
+					{
+						name: "凶器",
+						url: "http://img04.sogoucdn.com/app/a/100520024/b03655c9639173bf67706c4a2180e3f8"
+					},
+					{
+						name: "cosplay",
+						url: "http://img01.sogoucdn.com/app/a/100520024/ef7dc81ee90f910cee23af604cb9a168"
+					}
+				];
+
+				$location.hash();
+				$anchorScroll();
+
+				$scope.goto = function(id){
+					$location.hash(id);
+					$anchorScroll();
+				}
+				
+			}]);
+		</script>
+					
+	</head>
+	<body ng-app="myapp" >
+		<div ng-controller="location"></div>
+		<div ng-controller="other">
+			<ul>
+				<li ng-repeat="d in list">
+					<p id="li_{{$index+1}}">{{ $index+1 + " - " + d.name}}</p>
+					<img src="{{d.url}}" />
+				</li>
+			</ul>
+			<div style="position: fixed; top:0; right:0; margin: 30px;">
+				<ul>
+					<li ng-repeat="d in list">
+						<a href ng-click="goto('li_' + ($index+1))">{{d.name}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

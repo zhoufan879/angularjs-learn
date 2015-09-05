@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="utf-8" />
+		<title>过滤器</title>
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			/*
+			 * 过滤器，可叠加使用，函数式
+			 * 
+			 * currency:"￥"
+			 * number:2
+			 * lowercase/uppercase
+			 * json
+			 * limitTo		{{ limitTo_expression | limitTo : [limit:] begin}}
+			 * date
+			 * orderBy
+			 * filter 
+			 * 
+			 * 自定义过滤器 firstUpper
+			 * 
+			 * 
+			 * */
+			var app = angular.module("myapp", []);
+			
+			app.filter("firstUpper", function(){
+				return function(str){
+					return str.charAt(0).toUpperCase() + str.substring(1);
+				};
+			})
+			
+			app.run(["$filter", function($filter){
+				console.log( $filter("currency")("8921890283781.9281002") );
+				
+				console.log( $filter("number")("8921890283781.9281002", 2) );
+				
+				console.log( $filter("limitTo")($filter("uppercase")("hello"),2) );
+				
+				console.log( $filter("firstUpper")("hello") );
+				
+			}]);
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

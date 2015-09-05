@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<!-- http://cdn.bootcss.com/angular.js/1.4.3/angular-route.js -->
+		<script type="text/javascript" src="js/angular-route.js" ></script>
+		<script type="text/javascript">
+			
+			/**
+			 * 路由插件：
+			 *
+			 * $routeProvider
+			 */
+			var app = angular.module("myapp", ['ngRoute']);
+			
+			app.run(["$rootScope", function($rootScope){
+				$rootScope.$on("$routeChangeStart", function(event, current, previous){
+					console.log(event);
+					console.log(current);
+					console.log(previous);
+					alert('loading...');
+				});
+				$rootScope.$on("$routeChangeSuccess", function(){
+					alert('load finish');
+				});
+			}]);
+			
+			app.config(["$routeProvider", function($routeProvider){
+			
+				$routeProvider
+				.when("/index", {
+					template: "<p>首页img</p>"
+				}).when("/intro", {
+					template: '<p>介绍公司</p><h1>文章列表</h1><ul><li ng-repeat="x in names"><a href="#article/{{$index}}">{{x.name}}</a></li></ul>',
+					controller : function($scope){
+						$scope.names = [
+							{ name : "笑傲江湖" },
+							{ name : "西游记" },
+							{ name : "花千骨" }
+						];
+					}
+				}).when("/article/:id", {
+					template: "<p>编号：{{id}}</p><p>标题：</p><p>内容：</p>",
+					controller : ["$scope", "$routeParams", function($scope, $routeParams){
+						console.log($routeParams);
+						$scope.id = $routeParams.id;
+					}]
+				}).when("/about", {
+					template: "<p>我们是。。。。。</p>"
+				}).otherwise({
+					redirectTo: "/index"
+				});
+			}]);
+			
+			app.controller("myController", ["$scope", function($scope){
+				
+			}]);
+			
+			
+		</script>
+		
+	</head>
+	<body ng-app="myapp" ng-controller="myController">
+		<a href="#index">首页</a>
+		<a href="#intro">介绍</a>
+		<a href="#about">关于</a>
+		<ng-view></ng-view>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html  >
+	<head>
+		<title>Angularjs 学习笔记一</title>
+		<meta charset="UTF-8"/>
+		<script type="text/javascript" src="js/angular.js"></script>
+
+		<!--
+        	知识点：
+        	。Angular下的 A 标签
+        	。Angular下的 SELECT 标签
+        	。Angular下的 Script 标签
+        	
+        	see 20
+        -->
+
+		<script type="text/javascript">
+			angular.module("myApp", []).controller("formController", function($scope) {
+				$scope.name = "zhoufan";
+				$scope.money = [
+					{ id : 1001, value : '0~1000'},
+					{ id : 1002, value : '1001~5000'},
+					{ id : 1003, value : '5001~10000'},
+					{ id : 1004, value : '10001~15000'},
+					{ id : 1005, value : '15001~25000'},
+					{ id : 1006, value : '25001~50000'},
+					{ id : 1007, value : '50001~100000'},
+					{ id : 1008, value : '100001~10000000'},
+					{ id : 1008, value : '10000001+'}
+				];
+			});
+		</script>
+		
+	</head>
+
+	<body>
+
+		<div ng-app="myApp" ng-controller="formController">
+			<form name="ff" novalidate>
+				<!-- no refresh -->
+				<a href="">a-tag from angularjs</a>
+				
+				<select name="money" ng-options="m.value for m in money" ng-model="myMoney">
+					<option value=""> -- 请选择 -- </option>
+				</select>
+				selected: {{myMoney}}
+				<hr>
+				
+				<script type="text/ng-template" id="/me.html">
+					Answer is ... zhoufan!
+				</script>
+				
+				<p>这个世界上最帅的男人是谁 -- <a ng-click="sTpl='/me.html'" style="cursor: pointer;">?</a>
+					
+				</p>
+				<span ng-include src="sTpl"></span>
+				
+			</form>
+		</div>
+		<hr>
+		<!-- refresh page -->
+		<a href="">a-tag from html</a>
+	</body>	
+</html>

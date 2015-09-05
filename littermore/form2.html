@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html  >
+	<head>
+		<title>Angularjs 学习笔记一</title>
+
+		<meta charset="UTF-8"/>
+
+		<script type="text/javascript" src="js/angular.js"></script>
+
+		<style type="text/css">
+			.warn {
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div ng-app="myApp" ng-controller="formController">
+			<form name="ff" novalidate>
+				name:<input type="text" ng-model="user.name" required />
+				<span class="warn" ng-show="!user.name">name is required!</span>
+				<br />
+				password:<input type="password" ng-model="user.pwd" />
+				<span class="warn" ng-show="!user.pwd">pwd is required!</span>
+				<br />
+				<button ng-click="submit()" ng-disabled="!user.name || !user.pwd"> Submit </button>
+				<button ng-click="resert()"> Reset </button>
+			</form>
+		</div>
+
+		<script type="text/javascript">
+			angular.module("myApp", []).controller("formController", function($scope) {
+				$scope.resert = function(){
+					$scope.user = {};
+				};
+				
+				$scope.submit = function(){
+					console.log(" 提交表单 ");
+					console.log($scope.user);
+				};
+				
+				// $scope.resert();
+			});
+		</script>
+	</body>	
+</html>

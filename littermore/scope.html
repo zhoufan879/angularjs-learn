@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			
+			/**
+			 * 知识点：
+			 *
+			 * $emit
+			 * $broadcast 
+			 * event
+			 *   - targetScope
+			 *   - currentScope
+			 *   - name
+			 *   - stopPropagation()
+			 * 
+			 */
+			
+			var app = angular.module("myapp",[]);
+			app.controller("scopeController", ["$scope", function($scope){
+				
+				$scope.count = 0;
+				
+				$scope.$on("myEvent", function(event){
+					console.log(event);
+					console.log(event.targetScope);
+					console.log(event.currentScope);
+					console.log(event.name);
+					$scope.count++;
+				});
+				
+			}]);
+			
+		</script>
+		
+	</head>
+	<body ng-app="myapp" >
+		<div ng-controller="scopeController">
+			{{count}}
+			<div ng-controller="scopeController" ng-click="$broadcast('myEvent')">
+				{{count}}
+				<div ng-controller="scopeController">
+					{{count}}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html  >
+	<head>
+		<title>Angularjs 学习笔记一</title>
+		<meta charset="UTF-8"/>
+		<script type="text/javascript" src="js/angular.js"></script>
+		
+		<script type="text/javascript">
+			angular.module("myApp", []).controller("formController", function($scope) {
+				$scope.name = "zhoufan";
+			});
+		</script>
+		
+		<style type="text/css">
+			input.ng-invalid {
+				border: 1px red solid !important;
+			}
+			input.ng-valid {
+				border: 1px green solid !important;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+
+		<div ng-app="myApp" ng-controller="formController">
+			<form name="ff" novalidate>
+				name: <input type="text" name="username" ng-model="name" ng-minLength=2 ng-maxLength=20 required />
+				pwd: <input type="password" name="userpwd" ng-model="pwd" ng-pattern="/^(?=.*[0-9].*)(?=.*[a-z].*)(?=.*[A-Z].*).{6,12}$/" required />
+				email: <input type="email" name="useremail" ng-model="email" />
+				<br />
+				检验是否未通过？username.$invalid: {{ ff.username.$invalid }}<br />
+				检验是否通过？username.$valid: {{ ff.username.$valid }}<br />
+				没有使用？username.$pristine: {{ ff.username.$pristine }}<br />
+				有使用？username.$dirty: {{ ff.username.$dirty }}<br />
+				错误：username.$error: {{ ff.username.$error }}<br />
+				--------------<br />
+				密码：username.$error: {{ ff.userpwd.$error }}<br />
+				
+				<br />
+				<button> Submit </button>
+			</form>
+		</div>
+
+	</body>	
+</html>

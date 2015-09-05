@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style type="text/css">
+			.bigone {
+				font-size: 50px;
+				font-weight: 800;
+			}
+		</style>
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			
+			/**
+			 * 知识点：
+			 *
+			 * service:
+			 * $http
+			 * 
+			 */
+			
+			angular.module("myapp", []).controller("search", ["$scope", "$http", "$timeout", function($scope, $http, $timeout){
+				
+				$scope.doSearch = function(){
+					var kw = $scope.keywords;
+					var url = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" + kw + "&json=1&bs=java&pbs=" + kw + "&cb=JSON_CALLBACK";
+					
+					var time;
+					
+					$timeout.cancel(time);
+					
+					time = $timeout(function(){
+						$http({
+							url: url,
+							method:"JSONP"
+						}).success(function(data){
+							// console.log(data);
+							$scope.list = data.s;
+						});	
+					}, 500);
+				};
+				
+			}]);
+			
+			
+		</script>
+		
+	</head>
+	<body ng-app="myapp" ng-controller="search">
+		<input type="text" ng-model="keywords" ng-keypress="doSearch()" />
+		<input type="button" ng-click="doSearch()" value=" 搜 索 " />
+		<ul class="content" >
+			<li ng-repeat="d in list">{{d}}</li>
+		</ul>
+	</body>
+</html>

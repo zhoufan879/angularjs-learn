@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			/*
+			 * 知识点
+			 * 
+			 * 工具方法：
+			 * $timeout
+			 * $apply
+			 * 
+			 * run()
+			 * 
+			 * */
+			var app = angular.module("myapp", []);
+			app.controller("abc", ["$scope", "$timeout", function($scope, $timeout){
+				$scope.name = "zhoufan879";
+				
+				// can use $timeout
+//				$timeout(function(){
+//					$scope.name = "glinda";
+//				}, 2000);
+
+				// or use this
+//				setTimeout(function(){
+//					$scope.$apply(function(){
+//						$scope.name = "glinda";	
+//					});
+//				}, 2000);
+				
+			}]);
+
+			// no '$scope'
+			app.run(["$rootScope", function($rootScope){
+				$rootScope.name = "小明";
+			}]);
+			
+		</script>
+	</head>
+	<body>
+		
+		<div ng-controller="abc">
+			<input type="text" ng-model="name" />
+			<p>{{ name }}</p>
+		</div>
+		
+		<div>
+			{{ name }}
+		</div>
+	</body>
+</html>

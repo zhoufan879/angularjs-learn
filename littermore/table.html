@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			
+			/*
+			 * 重点：
+			 * 
+			 * $filter
+			 * $timeout 避免抖动
+			 * $watch
+			 * $repeat
+			 * callee
+			 * 
+			 * 
+			 * */
+			
+			var app = angular.module("myapp", []);
+			
+			app.controller("tableControler", ["$scope", "$filter", "$timeout", function($scope, $filter, $timeout){
+				var list = [
+					{ name : 'zhoufan', age : 27, deposit: 9271039},
+					{ name : 'james', age : 37, deposit: 632121.93002},
+					{ name : 'joy', age : 117, deposit: 827.0381},
+					{ name : 'annie', age : 1, deposit: 11928.9991892},
+					{ name : 'han', age : 55, deposit: 55958}
+				];
+				
+				$scope.data = list;
+				
+				$scope.orderBy = function(arg){
+					arguments.callee["sort" + arg] = !arguments.callee["sort" + arg];
+					$scope.data = $filter("orderBy")(list, arg, !arguments.callee["sort" + arg]);
+					
+				};
+				
+				$scope.$watch("keyword", function(newVal, oldVal){
+					var t;
+					if(newVal){
+						if(t){
+							$timeout.cancel(t);
+						}
+						t = $timeout(function(){
+							// $scope.data = $filter("filter")(list, newVal);  // 全文搜索
+							$scope.data = $filter("filter")(list, {name:newVal});	// 指定1~n个字段搜索
+						},350);
+					}
+				});
+				
+			}]);
+			
+		</script>
+		
+	</head>
+	<body>
+		
+		<div ng-app="myapp" ng-controller="tableControler">
+			<input type="text" ng-model="keyword" />
+			<br /><br />
+			<table border="1">
+				<tr>
+					<th>序列</th>
+					<th ng-click="orderBy('name')">姓名</th>
+					<th ng-click="orderBy('age')">年龄</th>
+					<th ng-click="orderBy('deposit')">存款</th>
+				</tr>
+				<tr ng-repeat="d in data">
+					<td>{{ $index + 1 }}</td>
+					<td>{{ d.name }}</td>
+					<td>{{ d.age }}</td>
+					<td>{{ d.deposit | currency : "￥" }}</td>
+				</tr>
+			</table>
+		</div>
+		
+	</body>
+</html>

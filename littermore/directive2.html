@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html  >
+	<head>
+		<title>Angularjs 学习笔记一</title>
+		<meta charset="UTF-8"/>
+		
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" src="js/angular.js"></script>
+
+		<!--
+        	知识点：
+        	
+        	自定义指令
+        	angular.module
+        		.controller
+        		.run
+        		.filter
+        		.directive
+					.transclude
+					.require - '^' '?'
+						
+        					
+        	
+        -->
+        
+		<script type="text/javascript">
+			var app = angular.module("myApp", []);
+			app.directive("b16", function(){
+				return {
+					restict: "E",
+					replace: true,
+					transclude: true,
+					template: "<div>{{cls}}：<div ng-transclude></div></div>",
+					controller : function($scope){
+						$scope.cls = "16班";
+						
+						this.name = "16班";
+						this.showus = function(){
+							alert(123);
+						}
+					}
+				}
+			}).directive("xiaom", function(){
+				return {
+					restrict: "E",
+					require: "^b16",
+					template: "<p>我叫{{name}}，来着{{cls}}</p>",
+					controller : function($scope){
+						$scope.name = "小明";	
+					}, 
+					link : function(scope, ele, attr, ctl){
+						// scope.cls = ctl.name;
+						console.log(ctl);
+					}
+				}
+			}).directive("xiaoh", function(){
+				return {
+					restrict: "E",
+					require: "^b16",
+					template: "<p>我叫{{name}}，来着{{cls}}</p>",
+					controller : function($scope){
+						$scope.name = "小华";	
+					}
+				}
+			}).directive("xiaof", function(){
+				return {
+					restrict: "E",
+					require: "?b16",
+					template: "<p>我叫小芳，来着{{cls}}</p>"
+				}
+			});
+		</script>
+		
+	</head>
+
+	<body ng-app="myApp">
+		<b16>
+			<xiaom></xiaom>
+			<xiaoh></xiaoh>
+			<xiaof></xiaof>
+		</b16>		
+	</body>	
+</html>

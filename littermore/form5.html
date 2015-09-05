@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html  >
+	<head>
+		<title>Angularjs 学习笔记一</title>
+		<meta charset="UTF-8"/>
+		<script type="text/javascript" src="js/angular.js"></script>
+
+		<!--
+        	知识点：
+        	
+        	see 21
+        -->
+
+		<script type="text/javascript">
+			var app = angular.module("myApp", []);
+			
+			app.filter("validate", function(){
+				return function(str){
+					console.log(str);
+					if(str==undefined){return;}
+					
+					var warn = [
+						{valid:"required",  tip : "此项为必填"},
+						{valid:"minLength", tip : "内容必须大于2位数"},
+						{valid:"maxLength", tip : "内容必须小于20位数"},
+						{valid:"pattern",   tip : "请填写中文"}
+					];
+					
+					return str.toUpperCase();
+				}
+			});
+			
+			app.controller("formController", function($scope) {
+				
+				$scope.user = {
+					name : 'zhoufan'
+				};
+				
+			});
+		</script>
+		
+	</head>
+
+	<body>
+
+		<div ng-app="myApp" ng-controller="formController">
+			<form name="ff" novalidate>
+				name: <input type="text" name="username" ng-model="user.name" required ng-minLength=2 ng-maxLength=20 />
+				<span>{{ff.username.$error}}</span>
+				{{warn}}
+				{{ff.username.$error}}
+				
+			</form>
+		</div>
+	</body>	
+</html>

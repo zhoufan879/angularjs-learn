@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html  >
+	<head>
+		<title>Angularjs 学习笔记一</title>
+		<meta charset="UTF-8"/>
+		
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" src="js/angular.js"></script>
+
+		<!--
+        	知识点：
+        	
+        	自定义指令
+        	angular.module
+        		.controller
+        		.run
+        		.filter
+        		.directive
+        			.restrict
+        			.replace
+        			.template
+        			.templateUrl
+        			.scope
+        				>独立作用域 - true
+        				>隔离作用域 - {} 
+        					绑定策略： ‘@’ - 字符串本身；‘=’ - 值 ； ‘&’ - 函数
+        			.link
+        				>scope
+        				>element
+        				>attr
+        				>reController
+        					
+        					
+        	see 24
+        -->
+        
+        <style type="text/css">
+        	.drag {
+        		width: 100px;
+        		height: 100px;
+        		background-color: #938;
+        		margin: 5px;
+        		position: absolute;
+        	}
+        	.active {
+        		border: 1px dotted red;
+        	}
+        	.clone {
+        		opacity: 0.1;
+        	}
+        </style>
+
+		<script type="text/javascript">
+			var app = angular.module("myApp", []);
+			
+			app.directive("myDrag", function(){
+				return {
+					restrict: "A",
+					link: function(scope, element, attr){
+						$(element).on("mousedown", function(){
+							var This = obj = this;
+							if(attr.myDrag=="true"){
+								This = $(this).clone();
+								$("body").append(This);
+								$(This).addClass("clone");
+							} 
+							
+							$(This).addClass("active");
+						
+							$(document).on("mousemove", function(event){
+								$("#out").val(event.pageX + " - " + event.pageY);
+								$(This).css({
+									"left" : event.pageX,
+									"top" : event.pageY
+								});
+							}).on("mouseup", function(event){
+								if(attr.myDrag=="true"){
+									$(This).remove();
+									This = obj;
+								}
+								$(This).css({
+									"left" : event.pageX,
+									"top" : event.pageY
+								});
+								
+								$(This).removeClass("active");
+								
+								$(document).off();
+							});
+							
+							return false;
+						});
+						
+					}
+				}
+			});
+		</script>
+		
+	</head>
+
+	<body ng-app="myApp">
+		<input type="text" id="out" />
+		<div class="drag" my-id="drag1" my-drag="true">Drag1</div>		
+		<div class="drag" my-id="drag2" my-drag="false">Drag2</div>
+	</body>	
+</html>

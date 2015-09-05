@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			
+//			function abc($scope){
+//				$scope.name = "zhoufan879";
+//			}
+			
+//			angular.module("myapp", []).controller("abc", function($scope, $rootScope){
+//				$scope.name = "zhoufan879";
+//				$rootScope.name = "吊爆啦";
+//				
+//				$scope.$watch("name", function(newVal, oldVal){
+//					console.log(newVal + " - " + oldVal);
+//				});
+//			});
+
+			angular.module("myapp", []).controller("abc", ["$scope", "$rootScope", function($scope, $rootScope){
+				$scope.name = "zhoufan879";
+				$rootScope.name = "吊爆啦";
+				
+				$scope.$watch("name", function(newVal, oldVal){
+					console.log(newVal + " - " + oldVal);
+				});
+				
+				var data1 = {
+					name : 'james',
+					age : 28,
+					attr : { 'habity' : 'ball' }
+				};
+				var data2 = {};
+				angular.copy(data1, data2);
+				console.log(data2);
+				
+				angular.extend(data2, data1);
+				console.log(data2);
+			}]);
+			
+			/*
+			 * 知识点
+			 * 
+			 * $rootScope 
+			 * $scope.$watch()
+			 * module 模块化，压缩的写法 ["$scope", function($scope){}]
+			 * 
+			 * */
+			
+			
+		</script>
+	</head>
+	<body>
+		
+		<div ng-controller="abc">
+			<input type="text" ng-model="name" />
+			<p>{{ name }}</p>
+		</div>
+		<p>{{ name }}</p>
+	</body>
+</html>

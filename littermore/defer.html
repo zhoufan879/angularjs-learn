@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			/**
+			 * 知识点：
+			 * 
+			 * $q 延迟对象
+			 * $*provider 供应商
+			 */
+		
+			angular.module("myapp", [])
+			.controller("defer", ["$scope", "$q", function($scope, $q){
+				
+				var defer = $q.defer();
+				
+				function show(){
+					setTimeout(function(){
+						
+						// defer.resolve();
+						defer.reject();
+						
+					},1000);
+					return defer.promise;
+				}
+				
+				show().then(function(){
+					console.log("succ");
+				},function(){
+					console.log("fail");
+				});
+				
+			}]);
+			
+//			var name = "The Window";
+//			var object = {
+//				name : "The Dodument",
+//				getName : function(){
+//					console.log(this);
+//					return function(){
+//						console.log(this);
+//						return this.name;
+//					}
+//				}
+//			};
+			
+		</script>
+					
+	</head>
+	<body ng-app="myapp" >
+		<div ng-controller="defer">
+		</div>
+	</body>
+</html>

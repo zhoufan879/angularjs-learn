@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html  >
+	<head>
+		<title>Angularjs 学习笔记一</title>
+		<meta charset="UTF-8"/>
+		
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" src="js/angular.js"></script>
+
+		<!--
+        	知识点：
+        	
+        	自定义指令
+        	angular.module
+        		.controller
+        		.run
+        		.filter
+        		.directive
+        			.restrict
+        			.replace
+        			.template
+        			.templateUrl
+        			.scope
+        				>独立作用域 - true
+        				>隔离作用域 - {} 
+        					绑定策略： ‘@’ - 字符串本身；‘=’ - 值 ； ‘&’ - 函数
+        			.link
+        				>scope
+        				>element
+        				>attr
+        				>reController
+        					
+        					
+        	see 24
+        -->
+        
+        <style type="text/css">
+        	input[type="button"] {
+        		background-color: #fff;
+        		border: 1px solid #000;
+        		padding: 2px 30px;
+        		margin: 0;
+        	}
+        	
+        	.l-tab {
+        		float: left;
+        		width: 350px;
+        	}
+        	
+        	.tab_content {
+        		display: none;
+        		height: 200px;
+        		width: 300px;
+        		border: 1px solid #000;	
+        	}
+        	
+        	.tab_content.active {
+        		display: block;
+        	}
+       
+       		input.active {
+       			background-color: orangered;
+       		} 	
+        	
+        </style>
+
+		<script type="text/javascript">
+			var app = angular.module("myApp", []);
+			
+			app.directive("myTab", function(){
+				return {
+					restrict: "E",
+					replace: true,
+					templateUrl: 'tabs.html',
+					scope: {
+						myId : '@',
+						myData : '=',
+						myFn : '&'
+					},
+					link : function(scope, element, attr, controller){
+						
+						$(element).delegate("input", "click", function(){
+							var $this = $(this);
+							var index = $this.index();
+							var $root = $(element);
+							$root.find("div.tab_content").eq( index ).addClass("active").siblings("div.tab_content").removeClass("active");
+							$this.addClass("active").siblings("input").removeClass("active");
+						});
+						
+					}				};
+			}).controller("myController", ["$scope", function($scope){
+				$scope.tab1 = [
+					{
+						name: "肉色",
+						url: "http://a.hiphotos.baidu.com/image/h%3D360/sign=e232134e09d79123ffe092729d355917/48540923dd54564ebaeaa77fb6de9c82d0584fec.jpg"
+					},
+					{
+						name: "小清新",
+						url: "http://h.hiphotos.baidu.com/image/h%3D360/sign=86381aeda344ad3431bf8181e0a20c08/574e9258d109b3de8b995c68cebf6c81800a4c8f.jpg"
+					},
+					{
+						name: "性感",
+						url: "http://h.hiphotos.baidu.com/image/h%3D360/sign=ccd6e5df5eafa40f23c6c8db9b65038c/562c11dfa9ec8a13dc01050df303918fa1ecc0c0.jpg"
+					}
+				];
+				
+				$scope.tab2 = [
+					{
+						name: "凶器",
+						url: "http://img0.imgtn.bdimg.com/it/u=3751291534,1249828506&fm=21&gp=0.jpg"
+					},
+					{
+						name: "cosplay",
+						url: "http://img5.imgtn.bdimg.com/it/u=2345704861,879211546&fm=21&gp=0.jpg"
+					}
+				];
+				
+			}]);
+		</script>
+		
+	</head>
+
+	<body ng-app="myApp" ng-controller="myController">
+		<my-tab my-id="tab1" my-data="tab1"></my-tab>
+		<my-tab my-id="tab2" my-data="tab2"></my-tab>
+		
+	</body>	
+</html>

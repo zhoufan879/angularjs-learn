@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style type="text/css">
+			.bigone {
+				font-size: 50px;
+				font-weight: 800;
+			}
+		</style>
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			
+			/**
+			 * 知识点：
+			 *
+			 * ng-class 
+			 * ng-style
+			 * ng-href
+			 * ng-src
+			 * ng-attr-(suffix)
+			 * 
+			 * ng-show
+			 * ng-hiden
+			 * ng-if
+			 * ng-swatch(on/default/when)
+			 * ng-open
+			 * 
+			 * ng-init     for/while
+			 * ng-include
+			 * ng-model.ng-model-options.updateOn
+			 * ng-controller.as
+			 */
+			
+			var form = angular.module("myform", []);
+			form.controller("formController", ["$scope", function($scope){
+				$scope.cls = "bigone";
+				$scope.syl = "{color:'red', 'background-color': 'yellow'}";
+				$scope.syl2 = "color:red; background-color: yellow";
+				$scope.url = "http://www.baidu.com";
+				
+				$scope.toggleSwitch = function(){
+					$scope.mSwitch = !$scope.mSwitch;
+				}
+			}]);
+			
+		</script>
+		
+	</head>
+	<body ng-app="myform" ng-controller="formController">
+		<div ng-class="cls">hello</div>
+		<div ng-style="{{syl}}">hello</div>
+		<a ng-href="{{url}}">百度</a>	<!-- 官方推荐写法，避免可能会出现的表达式未加载成功 -->
+		<a href="{{url}}">百度</a>
+		<div ng-attr-class="{{cls}}" ng-attr-style="{{syl2}}" ng-attr-id="_div">
+			123456
+		</div>
+		
+		<hr>
+		<button ng-model="mSwitch" ng-click="toggleSwitch()">开关</button>
+		<div ng-show="mSwitch">123456</div>
+		<div ng-if="mSwitch">123456</div>
+		<div ng-switch on="mSwitch">
+			<p ng-switch-default>虎虎1</p>
+			<p ng-switch-when="true">呵呵2</p>
+		</div>
+		<div id="include" ng-include="'include.html'"></div>
+		<input type="text" ng-model="name" ng-model-options="{updateOn:'blur'}" />
+		{{name}}
+	</body>
+</html>

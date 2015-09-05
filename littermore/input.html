@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<script type="text/javascript" src="js/angular.js" ></script>
+		
+		<script type="text/javascript">
+			
+			/**
+			 * 知识点：
+			 * 
+			 * ng-disabled
+			 * ng-readyonly
+			 * ng-checked
+			 * ng-value
+			 * 
+			 * ng-bind
+			 * ng-bind-template
+			 * ng-bind-html (angular-sanitize)
+			 * ng-cloak		display:none --> block;
+			 * ng-non-bindable
+			 *
+			 */
+			
+			var form = angular.module("myform", []);
+			form.controller("formController", ["$scope", function($scope){
+				$scope.input_disabled = false;
+				$scope.btn_disabled = true;
+				
+				$scope.geetting = "hello";
+			}]);
+			
+		</script>
+		
+	</head>
+	<body ng-app="myform" ng-controller="formController">
+		<form role="form" action="/" id="ff" name="ff">
+			name:<input type="text" ng-maxLength="10" ng-required="true" ng-model="name" ng-disabled="input_disabled" /><br />
+			ident:<input type="text" ng-model="ident" ng-disabled="input_disabled" ng-required="true"/><br />
+			email:<input type="text" ng-model="email" ng-disabled="input_disabled" ng-required="true"/><br />
+			<br /><br />
+			<button ng-disabled="ff.$invalid">&nbsp;提&nbsp;&nbsp;交&nbsp;</button>
+		</form>
+		<h1>{{geetting}}</h1>
+		<h1 ng-bind-template="{{geetting}} + {{geetting}}"></h1>
+		<h1 ng-cloak>{{geetting}}</h1>
+		<h1 ng-non-bindable>{{geetting}}</h1>
+		
+	</body>
+</html>
