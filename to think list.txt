@@ -11,6 +11,11 @@
 10. karma + jasmine
 11. Protractor(angularjs)
 
+12. 书籍
+《Javascript权威指南》
+《Javascript高级程序设计》
+《Javascript语言精粹》
+《Javascript模式》
 
 后端：
 1. docker
